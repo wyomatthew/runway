@@ -1,0 +1,11 @@
+[package]
+name = "runway"
+version = "0.1.0"
+authors = ["Quinn Zipse <quinn@quinnzipse.dev>", "Matthew Pickering <wyompick@gmail.com>"]
+edition = "2021"
+description = "Runway :)"
+
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]

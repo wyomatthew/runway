@@ -32,23 +32,33 @@ pub enum Stage {
             Option<Vec<Identifier>, Option<Vec<(TopQuantifier, AliasExpression)>>>,
         ),
     ),
-    Bin((Identifier, Vec<AssignmentExpression>)), 
-    IpLoc((Identifier, Optional<Vect<(LocField, AliasExpression)>>)), 
-    Join((Vec<AssignmentExpression>, Query, AliasExpression, EvalExpression)),
-    Tag(),   // TODO: implement
+    Bin((Identifier, Vec<AssignmentExpression>)),
+    IpLoc((Identifier, Optional<Vect<(LocField, AliasExpression)>>)),
+    Join(
+        (
+            Vec<AssignmentExpression>,
+            Query,
+            AliasExpression,
+            EvalExpression,
+        ),
+    ),
+    Tag(TagOperator),
 }
 
-#[derive(Debug,PartialEq)]
+#[derive(Debug, PartialEq)]
+pub struct TagOperator(Vec<Literal>);
+
+#[derive(Debug, PartialEq)]
 pub enum LocField {
     City,
     Continent,
     Country,
     LatLon,
     Region,
-    Timezone
+    Timezone,
 }
 
-#[derive(Debug,PartialEq)]
+#[derive(Debug, PartialEq)]
 pub enum TopQuantifier {
     TopCount,
     TopPercent,

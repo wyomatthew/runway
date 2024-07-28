@@ -24,14 +24,25 @@ pub enum Stage {
     Comp(),   // TODO: implement
     Limit(),  // TODO: implement
     Sort(),   // TODO: implement
-    Dedup((Vec<Indentifier>, Option<(SortOrder, Identifier)>)),  // TODO: implement QUINN START HERE
-    Top(),    // TODO: implement
-    Bin(),    // TODO: implement
-    IpLoc(),  // TODO: implement
-    Join(),   // TODO: implement
-    Tag(),    // TODO: implement
+    Dedup((Vec<Indentifier>, Option<(SortOrder, Identifier)>)),
+    Top(
+        (
+            Option<Literal>,
+            Identifier,
+            Option<Vec<Identifier>, Option<Vec<(TopQuantifier, AliasExpression)>>>,
+        ),
+    ),
+    Bin(),   // TODO: implement
+    IpLoc(), // TODO: implement
+    Join(),  // TODO: implement
+    Tag(),   // TODO: implement
 }
 
+#[derive(Debug,PartialEq)]
+pub enum TopQuantifier {
+    TopCount,
+    TopPercent,
+}
 
 #[derive(Debug, PartialEq)]
 pub enum EvalExpression {
@@ -43,9 +54,7 @@ pub enum EvalExpression {
 
 /// TODO: implement
 #[derive(Debug, PartialEq)]
-pub struct Function {
-
-}
+pub struct Function {}
 
 #[derive(Debug, PartialEq)]
 pub struct AliasExpression {}
@@ -71,7 +80,7 @@ pub enum SortOrder {
 }
 
 /// TODO: implement
-#[derive(Debug,PartialEq)]
+#[derive(Debug, PartialEq)]
 pub enum OperatorExpression {
     BinaryOperator(BinaryOperator),
     UnaryOperator(UnaryOperator),

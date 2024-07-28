@@ -19,11 +19,11 @@ pub struct Operation(Stage);
 #[derive(Debug, PartialEq)]
 pub enum Stage {
     Fields(Vec<(Identifier, Option<AliasExpression>)>),
-    Filter(), // TODO: implement
-    Alter(),  // TODO: implement
-    Comp(),   // TODO: implement
-    Limit(),  // TODO: implement
-    Sort(),   // TODO: implement
+    Filter(EvalExpression),
+    Alter(Vec<DeclarationExpression>),
+    Comp(Function, Vec<(Identifier, Option<AliasExpression>)>, Vec<Identifier>),
+    Limit(Literal),
+    Sort(Vec<(SortOrder, Identifier)>),
     Dedup(),  // TODO: implement QUINN START HERE
     Top(),    // TODO: implement
     Bin(),    // TODO: implement
@@ -40,6 +40,14 @@ pub enum EvalExpression {
     Function(Function),
     Operator(OperatorExpression),
 }
+
+/// TODO: implement
+#[derive(Debug,PartialEq)]
+pub struct DeclarationExpression();
+
+/// TODO: implement
+#[derive(Debug,PartialEq)]
+pub struct AssignmentExpression(Identifier, Literal);
 
 /// TODO: implement
 #[derive(Debug, PartialEq)]

@@ -80,7 +80,6 @@ pub enum EvalExpression {
 #[derive(Debug, PartialEq)]
 pub struct DeclarationExpression();
 
-/// TODO: implement QUINN
 #[derive(Debug, PartialEq)]
 pub struct AssignmentExpression(Identifier, Literal);
 

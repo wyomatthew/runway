@@ -32,6 +32,21 @@ pub enum Stage {
     Tag(),    // TODO: implement
 }
 
+
+#[derive(Debug, PartialEq)]
+pub enum EvalExpression {
+    Identifier(Identifier),
+    Literal(Literal),
+    Function(Function),
+    Operator(OperatorExpression),
+}
+
+/// TODO: implement
+#[derive(Debug, PartialEq)]
+pub struct Function {
+
+}
+
 #[derive(Debug, PartialEq)]
 pub struct AliasExpression {}
 
@@ -53,6 +68,13 @@ pub enum Literal {
 pub enum SortOrder {
     Asc,
     Desc,
+}
+
+/// TODO: implement
+#[derive(Debug,PartialEq)]
+pub enum OperatorExpression {
+    BinaryOperator(BinaryOperator),
+    UnaryOperator(UnaryOperator),
 }
 
 /// TODO: implement

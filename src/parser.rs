@@ -32,7 +32,7 @@ pub enum Stage {
             Option<Vec<Identifier>, Option<Vec<(TopQuantifier, AliasExpression)>>>,
         ),
     ),
-    Bin(),   // TODO: implement
+    Bin((Identifier, Vec<AssignmentExpression>)), 
     IpLoc(), // TODO: implement
     Join(),  // TODO: implement
     Tag(),   // TODO: implement

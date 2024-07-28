@@ -24,7 +24,7 @@ pub enum Stage {
     Comp(),   // TODO: implement
     Limit(),  // TODO: implement
     Sort(),   // TODO: implement
-    Dedup(),  // TODO: implement QUINN START HERE
+    Dedup((Vec<Indentifier>, Option<(SortOrder, Identifier)>)),  // TODO: implement QUINN START HERE
     Top(),    // TODO: implement
     Bin(),    // TODO: implement
     IpLoc(),  // TODO: implement

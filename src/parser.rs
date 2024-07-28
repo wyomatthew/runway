@@ -34,7 +34,7 @@ pub enum Stage {
     ),
     Bin((Identifier, Vec<AssignmentExpression>)), 
     IpLoc((Identifier, Optional<Vect<(LocField, AliasExpression)>>)), 
-    Join(),  // TODO: implement
+    Join((Vec<AssignmentExpression>, Query, AliasExpression, EvalExpression)),
     Tag(),   // TODO: implement
 }
 

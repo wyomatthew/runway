@@ -24,14 +24,45 @@ pub enum Stage {
     Comp(Function, Vec<(Identifier, Option<AliasExpression>)>, Vec<Identifier>),
     Limit(Literal),
     Sort(Vec<(SortOrder, Identifier)>),
-    Dedup(),  // TODO: implement QUINN START HERE
-    Top(),    // TODO: implement
-    Bin(),    // TODO: implement
-    IpLoc(),  // TODO: implement
-    Join(),   // TODO: implement
-    Tag(),    // TODO: implement
+    Dedup((Vec<Indentifier>, Option<(SortOrder, Identifier)>)),
+    Top(
+        (
+            Option<Literal>,
+            Identifier,
+            Option<Vec<Identifier>, Option<Vec<(TopQuantifier, AliasExpression)>>>,
+        ),
+    ),
+    Bin((Identifier, Vec<AssignmentExpression>)),
+    IpLoc((Identifier, Optional<Vect<(LocField, AliasExpression)>>)),
+    Join(
+        (
+            Vec<AssignmentExpression>,
+            Query,
+            AliasExpression,
+            EvalExpression,
+        ),
+    ),
+    Tag(TagOperator),
 }
 
+#[derive(Debug, PartialEq)]
+pub struct TagOperator(Vec<Literal>);
+
+#[derive(Debug, PartialEq)]
+pub enum LocField {
+    City,
+    Continent,
+    Country,
+    LatLon,
+    Region,
+    Timezone,
+}
+
+#[derive(Debug, PartialEq)]
+pub enum TopQuantifier {
+    TopCount,
+    TopPercent,
+}
 
 #[derive(Debug, PartialEq)]
 pub enum EvalExpression {
@@ -51,9 +82,7 @@ pub struct AssignmentExpression(Identifier, Literal);
 
 /// TODO: implement
 #[derive(Debug, PartialEq)]
-pub struct Function {
-
-}
+pub struct Function {}
 
 #[derive(Debug, PartialEq)]
 pub struct AliasExpression {}
@@ -79,7 +108,7 @@ pub enum SortOrder {
 }
 
 /// TODO: implement
-#[derive(Debug,PartialEq)]
+#[derive(Debug, PartialEq)]
 pub enum OperatorExpression {
     BinaryOperator(BinaryOperator),
     UnaryOperator(UnaryOperator),

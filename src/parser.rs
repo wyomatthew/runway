@@ -49,11 +49,8 @@ pub enum Stage {
             EvalExpression,
         ),
     ),
-    Tag(TagOperator),
+    Tag(TagList),
 }
-
-#[derive(Debug, PartialEq)]
-pub struct TagOperator(Vec<Literal>);
 
 #[derive(Debug, PartialEq)]
 pub enum LocField {
@@ -107,14 +104,12 @@ pub enum Literal {
     TimeLiteral(), // TODO: implement
 }
 
-/// TODO: implement
 #[derive(Debug, PartialEq)]
 pub enum SortOrder {
     Asc,
     Desc,
 }
 
-/// TODO: implement
 #[derive(Debug, PartialEq)]
 pub enum OperatorExpression {
     BinaryOperator(BinaryOperator),
@@ -125,11 +120,13 @@ pub enum OperatorExpression {
 #[derive(Debug, PartialEq)]
 pub struct BinaryOperator {}
 
-/// TODO: implement
 #[derive(Debug, PartialEq)]
 pub enum UnaryOperator {
     Not,
 }
+
+#[derive(Debug, PartialEq)]
+pub struct TagList(Vec<Literal>);
 
 impl UnaryOperator {
     fn get_value(&self) -> &'static str {

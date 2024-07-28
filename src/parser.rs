@@ -1,15 +1,15 @@
 #[derive(Debug, PartialEq)]
 pub struct Query(Option<Config>, SourceStatement, Vec<Operation>);
 
-/// TODO: implement
+/// TODO: implement QUINN
 #[derive(Debug, PartialEq)]
 pub struct Config {}
 
-/// TODO: implement
+/// TODO: implement MATTHEW
 #[derive(Debug, PartialEq)]
 pub struct SourceStatement {}
 
-/// TODO: implement
+/// TODO: implement QUINN
 #[derive(Debug, PartialEq)]
 enum SourceType {}
 
@@ -76,32 +76,32 @@ pub enum EvalExpression {
     Operator(OperatorExpression),
 }
 
-/// TODO: implement
+/// TODO: implement MATTHEW
 #[derive(Debug, PartialEq)]
 pub struct DeclarationExpression();
 
-/// TODO: implement
+/// TODO: implement QUINN
 #[derive(Debug, PartialEq)]
 pub struct AssignmentExpression(Identifier, Literal);
 
-/// TODO: implement
+/// TODO: implement MATTHEW
 #[derive(Debug, PartialEq)]
 pub struct Function {}
 
 #[derive(Debug, PartialEq)]
 pub struct AliasExpression {}
 
-/// TODO: implement
+/// TODO: implement QUINN
 #[derive(Debug, PartialEq)]
 pub struct Identifier {}
 
-/// TODO: implement
+/// TODO: implement MATTHEW
 #[derive(Debug, PartialEq)]
 pub enum Literal {
     IntegerLiteral(i32),
     FloatLiteral(f32),
     StringLiteral(String),
-    TimeLiteral(), // TODO: implement
+    TimeLiteral(), // TODO: implement QUINN
 }
 
 #[derive(Debug, PartialEq)]
@@ -116,7 +116,7 @@ pub enum OperatorExpression {
     UnaryOperator(UnaryOperator),
 }
 
-/// TODO: implement
+/// TODO: implement MATTHEW
 #[derive(Debug, PartialEq)]
 pub struct BinaryOperator {}
 

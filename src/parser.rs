@@ -21,19 +21,26 @@ pub enum Stage {
     Fields(Vec<(Identifier, Option<AliasExpression>)>),
     Filter(EvalExpression),
     Alter(Vec<DeclarationExpression>),
-    Comp(Function, Vec<(Identifier, Option<AliasExpression>)>, Vec<Identifier>),
+    Comp(
+        Function,
+        Vec<(Identifier, Option<AliasExpression>)>,
+        Vec<Identifier>,
+    ),
     Limit(Literal),
     Sort(Vec<(SortOrder, Identifier)>),
-    Dedup((Vec<Indentifier>, Option<(SortOrder, Identifier)>)),
+    Dedup((Vec<Identifier>, Option<(SortOrder, Identifier)>)),
     Top(
         (
             Option<Literal>,
             Identifier,
-            Option<Vec<Identifier>, Option<Vec<(TopQuantifier, AliasExpression)>>>,
+            Option<(
+                Vec<Identifier>,
+                Option<Vec<(TopQuantifier, AliasExpression)>>,
+            )>,
         ),
     ),
     Bin((Identifier, Vec<AssignmentExpression>)),
-    IpLoc((Identifier, Optional<Vect<(LocField, AliasExpression)>>)),
+    IpLoc((Identifier, Option<Vec<(LocField, AliasExpression)>>)),
     Join(
         (
             Vec<AssignmentExpression>,
@@ -73,11 +80,11 @@ pub enum EvalExpression {
 }
 
 /// TODO: implement
-#[derive(Debug,PartialEq)]
+#[derive(Debug, PartialEq)]
 pub struct DeclarationExpression();
 
 /// TODO: implement
-#[derive(Debug,PartialEq)]
+#[derive(Debug, PartialEq)]
 pub struct AssignmentExpression(Identifier, Literal);
 
 /// TODO: implement

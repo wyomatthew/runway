@@ -33,9 +33,19 @@ pub enum Stage {
         ),
     ),
     Bin((Identifier, Vec<AssignmentExpression>)), 
-    IpLoc(), // TODO: implement
+    IpLoc((Identifier, Optional<Vect<(LocField, AliasExpression)>>)), 
     Join(),  // TODO: implement
     Tag(),   // TODO: implement
+}
+
+#[derive(Debug,PartialEq)]
+pub enum LocField {
+    City,
+    Continent,
+    Country,
+    LatLon,
+    Region,
+    Timezone
 }
 
 #[derive(Debug,PartialEq)]

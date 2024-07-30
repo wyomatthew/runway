@@ -1,3 +1,17 @@
+use nom::{
+    branch::alt,
+    character::complete::i32,
+    combinator::{map, map_res},
+    IResult,
+};
+
+/// Represents a type that can be parsed from a string
+pub trait Parsable: Sized {
+    /// Parses an instance of the calling type from a string. Returns the
+    /// unparsed remainder of the input string and the parsed instance.
+    fn parse(input: &str) -> IResult<&str, Self>;
+}
+
 #[derive(Debug, PartialEq)]
 pub struct Query(Option<Config>, SourceStatement, Vec<Operation>);
 
@@ -136,12 +150,29 @@ impl UnaryOperator {
     }
 }
 
+impl Parsable for Literal {
+    fn parse(input: &str) -> IResult<&str, Self> {
+        map(i32, |num: i32| -> Literal { Literal::IntegerLiteral(num) })(input)
+        // TODO implement other literal types
+    }
+}
+
 mod tests {
     use super::*;
 
     #[test]
-    fn it_works() {
-        let result = 2 + 4;
-        assert_eq!(result, 6);
+    fn parse_integer_literal_positive() {
+        assert_eq!(
+            Literal::parse("32"),
+            IResult::Ok(("", Literal::IntegerLiteral(32)))
+        );
+    }
+
+    #[test]
+    fn parse_integer_literal_negative() {
+        assert_eq!(
+            Literal::parse("-32"),
+            IResult::Ok(("", Literal::IntegerLiteral(-32)))
+        );
     }
 }

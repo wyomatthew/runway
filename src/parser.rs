@@ -17,15 +17,20 @@ pub struct Query(Option<Config>, SourceStatement, Vec<Operation>);
 
 /// TODO: implement QUINN
 #[derive(Debug, PartialEq)]
-pub struct Config {}
+pub struct Config();
 
 /// TODO: implement MATTHEW
 #[derive(Debug, PartialEq)]
 pub struct SourceStatement {}
 
-/// TODO: implement QUINN
 #[derive(Debug, PartialEq)]
-enum SourceType {}
+enum SourceType {
+    Datamodel,
+    DatamodelDataset,
+    Dataset,
+    Preset,
+    ColdDataset
+}
 
 #[derive(Debug, PartialEq)]
 pub struct Operation(Stage);
@@ -94,7 +99,6 @@ pub enum EvalExpression {
 #[derive(Debug, PartialEq)]
 pub struct DeclarationExpression();
 
-/// TODO: implement QUINN
 #[derive(Debug, PartialEq)]
 pub struct AssignmentExpression(Identifier, Literal);
 

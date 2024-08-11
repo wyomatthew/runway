@@ -114,18 +114,17 @@ pub enum SortOrder {
 
 #[derive(Debug, PartialEq)]
 pub enum OperatorExpression {
-    BinaryOperator(BinaryOperator),
-    UnaryOperator(UnaryOperator),
+    BinaryOperator(Box<EvalExpression>, Box<EvalExpression>, BinaryOperatorKind),
+    UnaryOperator(Box<EvalExpression>, UnaryOperatorKind),
 }
 
-/// TODO: implement MATTHEW
 #[derive(Debug, PartialEq)]
-pub enum BinaryOperator {
+pub enum BinaryOperatorKind {
     Dot,
 }
 
 #[derive(Debug, PartialEq)]
-pub enum UnaryOperator {
+pub enum UnaryOperatorKind {
     Not,
 }
 

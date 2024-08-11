@@ -121,6 +121,21 @@ pub enum OperatorExpression {
 #[derive(Debug, PartialEq)]
 pub enum BinaryOperatorKind {
     Dot,
+    Equal,
+    NotEqual,
+    Less,
+    LessEq,
+    Greater,
+    GreaterEq,
+    And,
+    Or,
+    In,
+    NotIn,
+    Contains,
+    NotContains,
+    RegexMatch,
+    Incidr6,
+    NotIncidr6,
 }
 
 #[derive(Debug, PartialEq)]

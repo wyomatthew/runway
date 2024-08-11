@@ -6,8 +6,7 @@ use nom::{
 };
 
 /// Represents a type that can be parsed from a string
-pub trait Parsable: Sized {
-    /// Parses an instance of the calling type from a string. Returns the
+pub trait Parsable: Sized { /// Parses an instance of the calling type from a string. Returns the
     /// unparsed remainder of the input string and the parsed instance.
     fn parse(input: &str) -> IResult<&str, Self>;
 }
@@ -63,8 +62,7 @@ pub enum Stage {
     Join(
         (
             Vec<AssignmentExpression>,
-            Query,
-            AliasExpression,
+            Query, AliasExpression,
             EvalExpression,
         ),
     ),
@@ -155,7 +153,9 @@ impl UnaryOperator {
 }
 
 impl Literal {
-    fn parse_int(input: &str) -> IResult<&str, Self> {}
+    fn parse_int(input: &str) -> IResult<&str, Self> {
+        map(i32, |num| Literal::IntegerLiteral(num))(input)
+    }
     fn parse_float(input: &str) -> IResult<&str, Self> {}
     fn parse_string(input: &str) -> IResult<&str, Self> {}
     fn parse_time(input: &str) -> IResult<&str, Self> {}
@@ -163,7 +163,6 @@ impl Literal {
 
 impl Parsable for Literal {
     fn parse(input: &str) -> IResult<&str, Self> {
-        map(i32, |num: i32| -> Literal { Literal::IntegerLiteral(num) })(input);
         alt((Literal::parse_int, Literal::parse_float, Literal::parse_time, Literal::parse_string))(input)
     }
 }

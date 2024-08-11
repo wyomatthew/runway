@@ -29,7 +29,7 @@ enum SourceType {
     DatamodelDataset,
     Dataset,
     Preset,
-    ColdDataset
+    ColdDataset,
 }
 
 #[derive(Debug, PartialEq)]
@@ -154,10 +154,17 @@ impl UnaryOperator {
     }
 }
 
+impl Literal {
+    fn parse_int(input: &str) -> IResult<&str, Self> {}
+    fn parse_float(input: &str) -> IResult<&str, Self> {}
+    fn parse_string(input: &str) -> IResult<&str, Self> {}
+    fn parse_time(input: &str) -> IResult<&str, Self> {}
+}
+
 impl Parsable for Literal {
     fn parse(input: &str) -> IResult<&str, Self> {
-        map(i32, |num: i32| -> Literal { Literal::IntegerLiteral(num) })(input)
-        // TODO implement other literal types
+        map(i32, |num: i32| -> Literal { Literal::IntegerLiteral(num) })(input);
+        alt((Literal::parse_int, Literal::parse_float, Literal::parse_time, Literal::parse_string))(input)
     }
 }
 

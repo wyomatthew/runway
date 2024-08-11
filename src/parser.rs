@@ -1,10 +1,8 @@
-use std::path::Prefix;
-
 use nom::{
     branch::alt,
     bytes::complete::tag,
-    character::complete::{char, i32, one_of},
-    combinator::{map, map_res, opt, recognize},
+    character::complete::{alphanumeric1, char, i32, one_of},
+    combinator::{all_consuming, map, map_res, not, opt, recognize},
     multi::{many0, many1},
     number::complete::recognize_float,
     sequence::{preceded, terminated, tuple},
@@ -13,7 +11,7 @@ use nom::{
 
 use crate::syntax_tree::{
     AliasExpression, AssignmentExpression, BinaryOperator, Config, DeclarationExpression,
-    EvalExpression, Function, Identifier, LocField, Operation, OperatorExpression, Query,
+    EvalExpression, Function, Identifier, Literal, LocField, Operation, OperatorExpression, Query,
     SortOrder, SourceStatement, SourceType, Stage, TagList, TopQuantifier, UnaryOperator,
 };
 
@@ -106,7 +104,11 @@ impl Parsable for AliasExpression {
 
 impl Parsable for Identifier {
     fn parse(input: &str) -> IResult<&str, Self> {
-        todo!()
+        let (remaining, consumed) = recognize(many1(alt((alphanumeric1, tag("_")))))(input)?;
+
+        not(all_consuming(Literal::parse))(consumed)?;
+
+        Ok((remaining, Identifier(String::from(consumed))))
     }
 }
 
@@ -133,9 +135,9 @@ mod identifier_test {
     #[test]
     fn numbers() {
         assert_eq!(
-            Err(nom::Err::Failure(nom::error::Error {
+            Err(nom::Err::Error(nom::error::Error {
                 input: "12345678",
-                code: nom::error::ErrorKind::IsNot
+                code: nom::error::ErrorKind::Not
             })),
             Identifier::parse("12345678")
         );
@@ -150,10 +152,22 @@ mod identifier_test {
     }
 
     #[test]
-    fn dot() {
+    fn special_chars() {
         assert_eq!(
             Ok((".column", Identifier(String::from("table")))),
             Identifier::parse("table.column")
+        );
+        assert_eq!(
+            Ok(("-column", Identifier(String::from("table")))),
+            Identifier::parse("table-column")
+        );
+        assert_eq!(
+            Ok(("", Identifier(String::from("table_column")))),
+            Identifier::parse("table_column")
+        );
+        assert_eq!(
+            Ok(("$column", Identifier(String::from("table")))),
+            Identifier::parse("table$column")
         );
     }
 }

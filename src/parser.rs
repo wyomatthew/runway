@@ -75,7 +75,7 @@ mod literal_test {
     use super::*;
 
     #[test]
-    fn parse_integer_literal_positive() {
+    fn parse_integer_positive() {
         assert_eq!(
             Literal::parse("32"),
             IResult::Ok(("", Literal::IntegerLiteral(32)))
@@ -83,10 +83,11 @@ mod literal_test {
     }
 
     #[test]
-    fn parse_integer_literal_negative() {
+    fn parse_integer_negative() {
         assert_eq!(
             Literal::parse("-32"),
             IResult::Ok(("", Literal::IntegerLiteral(-32)))
         );
     }
+
 }

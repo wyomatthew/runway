@@ -10,9 +10,9 @@ use nom::{
 };
 
 use crate::syntax_tree::{
-    AliasExpression, AssignmentExpression, BinaryOperator, Config, DeclarationExpression,
-    EvalExpression, Function, Identifier, Literal, LocField, Operation, OperatorExpression, Query,
-    SortOrder, SourceStatement, SourceType, Stage, TagList, TopQuantifier, UnaryOperator,
+    AliasExpression, AssignmentExpression, Config, DeclarationExpression, EvalExpression, Function,
+    Identifier, Literal, LocField, Operation, OperatorExpression, Query, SortOrder,
+    SourceStatement, SourceType, Stage, TagList, TopQuantifier,
 };
 
 mod literal;
@@ -110,23 +110,7 @@ impl Parsable for SortOrder {
     }
 }
 
-impl Parsable for OperatorExpression {
-    fn parse(input: &str) -> IResult<&str, Self> {
-        todo!()
-    }
-}
-
-impl Parsable for BinaryOperator {
-    fn parse(input: &str) -> IResult<&str, Self> {
-        todo!()
-    }
-}
-
-impl Parsable for UnaryOperator {
-    fn parse(input: &str) -> IResult<&str, Self> {
-        todo!()
-    }
-}
+mod operator_expression;
 
 impl Parsable for TagList {
     fn parse(input: &str) -> IResult<&str, Self> {

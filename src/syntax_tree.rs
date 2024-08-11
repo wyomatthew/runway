@@ -15,7 +15,7 @@ pub enum SourceType {
     DatamodelDataset,
     Dataset,
     Preset,
-    ColdDataset
+    ColdDataset,
 }
 
 #[derive(Debug, PartialEq)]
@@ -49,7 +49,8 @@ pub enum Stage {
     Join(
         (
             Vec<AssignmentExpression>,
-            Query, AliasExpression,
+            Query,
+            AliasExpression,
             EvalExpression,
         ),
     ),

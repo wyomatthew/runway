@@ -16,27 +16,27 @@ impl Parsable for OperatorExpression {
 impl Parsable for BinaryOperatorKind {
     fn parse(input: &str) -> IResult<&str, Self> {
         alt((
-            map(tag("."), |text| BinaryOperatorKind::Dot),
-            map(tag("="), |text| BinaryOperatorKind::Equal),
-            map(tag("!="), |text| BinaryOperatorKind::NotEqual),
-            map(tag("<"), |text| BinaryOperatorKind::Less),
-            map(tag("<="), |text| BinaryOperatorKind::LessEq),
-            map(tag(">"), |text| BinaryOperatorKind::Greater),
-            map(tag(">="), |text| BinaryOperatorKind::GreaterEq),
-            map(tag("and"), |text| BinaryOperatorKind::And),
-            map(tag("or"), |text| BinaryOperatorKind::Or),
-            map(tag("IN"), |text| BinaryOperatorKind::In),
-            map(separated_pair(tag("NOT"), space1, tag("IN")), |text| {
+            map(tag("."), |_| BinaryOperatorKind::Dot),
+            map(tag("="), |_| BinaryOperatorKind::Equal),
+            map(tag("!="), |_| BinaryOperatorKind::NotEqual),
+            map(tag("<"), |_| BinaryOperatorKind::Less),
+            map(tag("<="), |_| BinaryOperatorKind::LessEq),
+            map(tag(">"), |_| BinaryOperatorKind::Greater),
+            map(tag(">="), |_| BinaryOperatorKind::GreaterEq),
+            map(tag("and"), |_| BinaryOperatorKind::And),
+            map(tag("or"), |_| BinaryOperatorKind::Or),
+            map(tag("IN"), |_| BinaryOperatorKind::In),
+            map(separated_pair(tag("NOT"), space1, tag("IN")), |_| {
                 BinaryOperatorKind::NotIn
             }),
-            map(tag("CONTAINS"), |text| BinaryOperatorKind::Contains),
+            map(tag("CONTAINS"), |_| BinaryOperatorKind::Contains),
             map(
                 separated_pair(tag("NOT"), space1, tag("CONTAINS")),
-                |text| BinaryOperatorKind::NotContains,
+                |_| BinaryOperatorKind::NotContains,
             ),
-            map(tag("~="), |text| BinaryOperatorKind::RegexMatch),
-            map(tag("INCIDR6"), |text| BinaryOperatorKind::Incidr6),
-            map(separated_pair(tag("NOT"), space1, tag("INCIDR6")), |text| {
+            map(tag("~="), |_| BinaryOperatorKind::RegexMatch),
+            map(tag("INCIDR6"), |_| BinaryOperatorKind::Incidr6),
+            map(separated_pair(tag("NOT"), space1, tag("INCIDR6")), |_| {
                 BinaryOperatorKind::NotEqual
             }),
         ))(input)

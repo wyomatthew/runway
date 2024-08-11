@@ -2,6 +2,7 @@ use nom::branch::alt;
 use nom::bytes::complete::tag;
 use nom::character::complete::{i32, one_of};
 use nom::combinator::{map, map_res, opt, recognize};
+use nom::error::ErrorKind;
 use nom::multi::{many0, many1};
 use nom::sequence::tuple;
 use nom::IResult;
@@ -25,11 +26,17 @@ fn parse_float(input: &str) -> IResult<&str, Literal> {
 }
 
 fn parse_time(input: &str) -> IResult<&str, Literal> {
-    todo!()
+    Err(nom::Err::Error(nom::error::Error {
+        input: "todo",
+        code: ErrorKind::Tag,
+    }))
 }
 
 fn parse_string(input: &str) -> IResult<&str, Literal> {
-    todo!()
+    Err(nom::Err::Error(nom::error::Error {
+        input: "todo",
+        code: ErrorKind::Tag,
+    }))
 }
 
 impl Parsable for Literal {

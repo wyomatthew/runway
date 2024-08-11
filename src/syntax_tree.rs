@@ -120,7 +120,9 @@ pub enum OperatorExpression {
 
 /// TODO: implement MATTHEW
 #[derive(Debug, PartialEq)]
-pub struct BinaryOperator {}
+pub enum BinaryOperator {
+    Dot,
+}
 
 #[derive(Debug, PartialEq)]
 pub enum UnaryOperator {

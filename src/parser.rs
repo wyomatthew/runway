@@ -152,12 +152,8 @@ mod identifier_test {
     #[test]
     fn dot() {
         assert_eq!(
-            Ok(("", Identifier(String::from("table.column")))),
+            Ok((".column", Identifier(String::from("table")))),
             Identifier::parse("table.column")
-        );
-        assert_eq!(
-            Ok((".not.valid", Identifier(String::from("table.column")))),
-            Identifier::parse("table.column.not.valid")
         );
     }
 }

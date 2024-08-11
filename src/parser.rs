@@ -110,6 +110,46 @@ impl Parsable for Identifier {
     }
 }
 
+#[cfg(test)]
+mod identifier_test {
+    use super::*;
+
+    #[test]
+    fn basic() {
+        assert_eq!(
+            Ok(("", Identifier(String::from("basicIdentifier")))),
+            Identifier::parse("basicIdentifier")
+        );
+    }
+
+    #[test]
+    fn spaces() {
+        assert_eq!(
+            Ok((" id2", Identifier(String::from("id1")))),
+            Identifier::parse("id1 id2")
+        );
+    }
+
+    #[test]
+    fn numbers() {
+        assert_eq!(
+            Err(nom::Err::Failure(nom::error::Error {
+                input: "12345678",
+                code: nom::error::ErrorKind::IsNot
+            })),
+            Identifier::parse("12345678")
+        );
+        assert_eq!(
+            Ok(("", Identifier(String::from("12345678a")))),
+            Identifier::parse("12345678a")
+        );
+        assert_eq!(
+            Ok(("", Identifier(String::from("a12345678")))),
+            Identifier::parse("a12345678")
+        );
+    }
+}
+
 impl Parsable for SortOrder {
     fn parse(input: &str) -> IResult<&str, Self> {
         todo!()

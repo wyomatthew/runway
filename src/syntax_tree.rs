@@ -1,5 +1,5 @@
 #[derive(Debug, PartialEq)]
-pub struct Query(Option<Config>, SourceStatement, Vec<Operation>);
+pub struct Query(pub Option<Config>, pub SourceStatement, pub Vec<Operation>);
 
 /// TODO: implement QUINN
 #[derive(Debug, PartialEq)]
@@ -19,7 +19,7 @@ pub enum SourceType {
 }
 
 #[derive(Debug, PartialEq)]
-pub struct Operation(Stage);
+pub struct Operation(pub Stage);
 
 #[derive(Debug, PartialEq)]
 pub enum Stage {
@@ -86,7 +86,7 @@ pub enum EvalExpression {
 pub struct DeclarationExpression();
 
 #[derive(Debug, PartialEq)]
-pub struct AssignmentExpression(Identifier, Literal);
+pub struct AssignmentExpression(pub Identifier, pub Literal);
 
 /// TODO: implement MATTHEW
 #[derive(Debug, PartialEq)]
@@ -96,7 +96,7 @@ pub struct Function {}
 pub struct AliasExpression {}
 
 #[derive(Debug, PartialEq)]
-pub struct Identifier(String);
+pub struct Identifier(pub String);
 
 #[derive(Debug, PartialEq)]
 pub enum Literal {
@@ -128,4 +128,4 @@ pub enum UnaryOperator {
 }
 
 #[derive(Debug, PartialEq)]
-pub struct TagList(Vec<Literal>);
+pub struct TagList(pub Vec<Literal>);

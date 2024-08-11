@@ -95,11 +95,9 @@ pub struct Function {}
 #[derive(Debug, PartialEq)]
 pub struct AliasExpression {}
 
-/// TODO: implement QUINN
 #[derive(Debug, PartialEq)]
-pub struct Identifier {}
+pub struct Identifier(String);
 
-/// TODO: implement MATTHEW
 #[derive(Debug, PartialEq)]
 pub enum Literal {
     IntegerLiteral(i32),

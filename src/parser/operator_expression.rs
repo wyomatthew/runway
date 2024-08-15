@@ -19,10 +19,10 @@ impl Parsable for BinaryOperatorKind {
             map(tag("."), |_| BinaryOperatorKind::Dot),
             map(tag("="), |_| BinaryOperatorKind::Equal),
             map(tag("!="), |_| BinaryOperatorKind::NotEqual),
-            map(tag("<"), |_| BinaryOperatorKind::Less),
             map(tag("<="), |_| BinaryOperatorKind::LessEq),
-            map(tag(">"), |_| BinaryOperatorKind::Greater),
+            map(tag("<"), |_| BinaryOperatorKind::Less),
             map(tag(">="), |_| BinaryOperatorKind::GreaterEq),
+            map(tag(">"), |_| BinaryOperatorKind::Greater),
             map(tag("and"), |_| BinaryOperatorKind::And),
             map(tag("or"), |_| BinaryOperatorKind::Or),
             map(tag("IN"), |_| BinaryOperatorKind::In),
@@ -81,7 +81,7 @@ mod binary_operator_kind_test {
     #[test]
     fn test_less_eq() {
         assert_eq!(
-            Ok(("<=", BinaryOperatorKind::LessEq)),
+            Ok(("", BinaryOperatorKind::LessEq)),
             BinaryOperatorKind::parse("<=")
         );
     }

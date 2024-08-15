@@ -88,9 +88,8 @@ pub struct DeclarationExpression();
 #[derive(Debug, PartialEq)]
 pub struct AssignmentExpression(pub Identifier, pub Literal);
 
-/// TODO: implement MATTHEW
 #[derive(Debug, PartialEq)]
-pub struct Function {}
+pub struct Function(pub Identifier, pub Vec<EvalExpression>);
 
 #[derive(Debug, PartialEq)]
 pub struct AliasExpression {}

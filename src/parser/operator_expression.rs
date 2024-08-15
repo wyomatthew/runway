@@ -89,7 +89,7 @@ mod binary_operator_kind_test {
     #[test]
     fn test_greater() {
         assert_eq!(
-            Ok((">", BinaryOperatorKind::Greater)),
+            Ok(("", BinaryOperatorKind::Greater)),
             BinaryOperatorKind::parse(">")
         );
     }
@@ -97,7 +97,7 @@ mod binary_operator_kind_test {
     #[test]
     fn test_greater_eq() {
         assert_eq!(
-            Ok((">=", BinaryOperatorKind::GreaterEq)),
+            Ok(("", BinaryOperatorKind::GreaterEq)),
             BinaryOperatorKind::parse(">=")
         );
     }

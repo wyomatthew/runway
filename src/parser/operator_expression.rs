@@ -1,15 +1,53 @@
 use nom::{
-    branch::alt, bytes::complete::tag, character::complete::space1, combinator::map,
-    sequence::separated_pair, IResult,
+    branch::alt,
+    bytes::complete::tag,
+    character::complete::{multispace1, space1},
+    combinator::map,
+    sequence::{delimited, separated_pair, tuple},
+    IResult,
 };
 
-use crate::syntax_tree::{BinaryOperatorKind, OperatorExpression, UnaryOperatorKind};
+use crate::syntax_tree::{
+    BinaryOperatorKind, EvalExpression, OperatorExpression, UnaryOperatorKind,
+};
 
 use super::Parsable;
 
+fn parse_binary_operator_expression(input: &str) -> IResult<&str, OperatorExpression> {
+    let (unparsed, (expression_left, _, operator_kind, _, expression_right)) = tuple((
+        EvalExpression::parse,
+        multispace1,
+        BinaryOperatorKind::parse,
+        multispace1,
+        EvalExpression::parse,
+    ))(input)?;
+
+    Ok((
+        unparsed,
+        OperatorExpression::BinaryOperator(
+            Box::new(expression_left),
+            Box::new(expression_right),
+            operator_kind,
+        ),
+    ))
+}
+
+fn parse_unary_operator_expression(input: &str) -> IResult<&str, OperatorExpression> {
+    let (unparsed, (operator_kind, expression)) =
+        separated_pair(UnaryOperatorKind::parse, multispace1, EvalExpression::parse)(input)?;
+
+    Ok((
+        unparsed,
+        OperatorExpression::UnaryOperator(Box::new(expression), operator_kind),
+    ))
+}
+
 impl Parsable for OperatorExpression {
     fn parse(input: &str) -> IResult<&str, Self> {
-        todo!()
+        alt((
+            parse_binary_operator_expression,
+            parse_unary_operator_expression,
+        ))(input)
     }
 }
 

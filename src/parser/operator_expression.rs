@@ -51,6 +51,28 @@ impl Parsable for OperatorExpression {
     }
 }
 
+#[cfg(test)]
+mod operator_expression_test {
+    use crate::syntax_tree::Literal;
+
+    use super::*;
+
+    #[test]
+    fn test_parse_binary_operator_expression() {
+        assert_eq!(
+            Ok((
+                "",
+                OperatorExpression::BinaryOperator(
+                    Box::new(EvalExpression::Literal(Literal::IntegerLiteral(3))),
+                    Box::new(EvalExpression::Literal(Literal::IntegerLiteral(9))),
+                    BinaryOperatorKind::GreaterEq
+                )
+            )),
+            parse_binary_operator_expression("3 >= 9")
+        );
+    }
+}
+
 impl Parsable for BinaryOperatorKind {
     fn parse(input: &str) -> IResult<&str, Self> {
         alt((

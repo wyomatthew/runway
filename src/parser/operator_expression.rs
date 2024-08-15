@@ -25,6 +25,10 @@ impl Parsable for BinaryOperatorKind {
             map(tag(">"), |_| BinaryOperatorKind::Greater),
             map(tag("and"), |_| BinaryOperatorKind::And),
             map(tag("or"), |_| BinaryOperatorKind::Or),
+            map(tag("INCIDR6"), |_| BinaryOperatorKind::Incidr6),
+            map(separated_pair(tag("NOT"), space1, tag("INCIDR6")), |_| {
+                BinaryOperatorKind::NotIncidr6
+            }),
             map(tag("IN"), |_| BinaryOperatorKind::In),
             map(separated_pair(tag("NOT"), space1, tag("IN")), |_| {
                 BinaryOperatorKind::NotIn
@@ -34,10 +38,6 @@ impl Parsable for BinaryOperatorKind {
                 BinaryOperatorKind::NotContains
             }),
             map(tag("~="), |_| BinaryOperatorKind::RegexMatch),
-            map(tag("INCIDR6"), |_| BinaryOperatorKind::Incidr6),
-            map(separated_pair(tag("NOT"), space1, tag("INCIDR6")), |_| {
-                BinaryOperatorKind::NotEqual
-            }),
         ))(input)
     }
 }
